@@ -1,7 +1,7 @@
 {
   "name": "csc-3100-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Randall De Leon\r Section 11",
   "homepage": "https://github.com/Rkdeleon123/csc-3100-app#readme",
   "bugs": {
     "url": "https://github.com/Rkdeleon123/csc-3100-app/issues"
@@ -14,14 +14,12 @@
   "author": "",
   "type": "commonjs",
   "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
-
-  ,
-"workspaces": [
-  "packages/*"
-  ]
-
-
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run dev -w react-frontend"
+  },
+  "devDependencies": {}
 }
