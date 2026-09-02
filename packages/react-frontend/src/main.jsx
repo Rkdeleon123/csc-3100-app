@@ -2,6 +2,10 @@ import ReactDOMClient from "react-dom/client";
 import MyApp from "./MyApp";
 import "./main.css";
 
+
+//small change
+
+
 const container = document.getElementById("root");
 
 // Create a root
