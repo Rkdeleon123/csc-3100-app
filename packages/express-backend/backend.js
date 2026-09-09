@@ -43,6 +43,22 @@ const addUser = (user) => {
   return user;
 };
 
+app.post("/users", (req, res) => {
+  const userToAdd = req.body;
+  addUser(userToAdd);
+  res.send();
+});
+
+const deleteUser = (user) => {
+  user["users_list"].pop(user);
+}
+
+app.delete("/users", (req, res) => {
+  const userToDelete = req.body;
+  deleteUser(userToDelete);
+  res.send();
+});
+
 app.get("/users/:id", (req, res) => {
   const id = req.params["id"]; //or req.params.id
   let result = findUserById(id);
@@ -51,13 +67,6 @@ app.get("/users/:id", (req, res) => {
   } else {
     res.send(result);
   }
-});
-
-
-app.post("/users", (req, res) => {
-  const userToAdd = req.body;
-  addUser(userToAdd);
-  res.send();
 });
 
 
