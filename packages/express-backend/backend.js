@@ -34,9 +34,7 @@ const users = {
   ],
 };
 
-const findUserById = (id) =>
-  users["users_list"].find((user) => user["id"] === id);
-
+app.use(express.json());
 
 const addUser = (user) => {
   users["users_list"].push(user);
@@ -49,28 +47,35 @@ app.post("/users", (req, res) => {
   res.send();
 });
 
-const deleteUser = (user) => {
-  user["users_list"].pop(user);
-}
+const deleteUser = (userId) => {
+  users["users_list"] = users["users_list"].filter((user) => user.id !== userId);
+};
 
 app.delete("/users", (req, res) => {
-  const userToDelete = req.body;
-  deleteUser(userToDelete);
+  console.log("delete received: ", req.body)
+  const { id } = req.body;
+  deleteUser(id);
   res.send();
 });
 
-app.get("/users/:id", (req, res) => {
-  const id = req.params["id"]; //or req.params.id
-  let result = findUserById(id);
-  if (result === undefined) {
-    res.status(404).send("Resource not found.");
-  } else {
+const findUserByName = (name) => {
+  return users["users_list"].filter((user) => user["name"] === name);
+};
+
+
+
+app.get("/users", (req, res) => {
+  const name = req.query.name;
+  if (name != undefined) {
+    let result = findUserByName(name);
+    result = { users_list: result };
     res.send(result);
+  } else {
+    res.send(users);
   }
 });
 
 
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
